@@ -22,8 +22,6 @@ class fifo_driver extends uvm_driver #(fifo_seq_item);
     
     fifo_seq_item item;
     
-    // 리셋 해제될 때까지 대기
-    //@(posedge vif.rst_n);
     
     forever begin
       seq_item_port.get_next_item (item);

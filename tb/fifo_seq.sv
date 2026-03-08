@@ -12,7 +12,6 @@ class fifo_wr_seq extends uvm_sequence #(fifo_seq_item);
     
     fifo_seq_item item;
     
-    //uvm_do(item) //disable constraint   
     for(i=0; i<10; i++) begin
       	`uvm_do_with (item, {item.wr_en==1; item.rd_en == 0;})
     end
@@ -34,7 +33,6 @@ class fifo_rd_seq extends uvm_sequence #(fifo_seq_item);
     integer i ;
     
     fifo_seq_item item;
-    //'uvm_do(item) //disable constraint
     
     
     for(i=0; i<10; i++) begin
@@ -42,5 +40,23 @@ class fifo_rd_seq extends uvm_sequence #(fifo_seq_item);
     end
 
   endtask
+
+endclass
+
+
+//added
+class fifo_rand_seq extends uvm_sequence #(fifo_seq_item);
+
+    task body
+        integer i;
+
+        fifo_seq_item item;
+
+        for(int i=0;I<10; i++)begin
+            `uvm_do(item)
+        end
+        
+    endtask
+
   
 endclass

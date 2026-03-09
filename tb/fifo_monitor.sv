@@ -17,10 +17,9 @@ class fifo_monitor extends uvm_monitor;
 
   virtual function void build_phase (uvm_phase phase);
     super.build_phase (phase);
-  
     ap_mon = new ("ap_mon", this);
+    data_obj = fifo_seq_item#()::type_id::create("data_obj", this);
 
-    //if (! uvm_config_db #(virtual sync_fifo_if) :: get(this, "", "vif", vif)) begin
     if (!uvm_config_db #(virtual sync_fifo_if #(.D_WIDTH(8)))::get(this, "", "vif", vif)) begin
 
       `uvm_error (get_type_name (), "DUT interface not found")
@@ -30,7 +29,7 @@ class fifo_monitor extends uvm_monitor;
 
   virtual task run_phase (uvm_phase phase);
 
-    data_obj = fifo_seq_item#()::type_id::create("data_obj", this);
+//    data_obj = fifo_seq_item#()::type_id::create("data_obj", this);
 
     forever begin
       @ (posedge vif.clk);
